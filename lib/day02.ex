@@ -1,20 +1,21 @@
 defmodule Day2 do
   def part1 do
-    "day02.txt"
-    |> File.stream!()
-    |> Enum.map(&String.trim/1)
-    |> Enum.map(fn x -> String.split(x, "x") |> Enum.map(&String.to_integer/1) end)
+    data()
     |> Enum.map(&calc_paper/1)
     |> Enum.sum()
   end
 
   def part2 do
+    data()
+    |> Enum.map(&calc_ribbon/1)
+    |> Enum.sum()
+  end
+
+  def data do
     "day02.txt"
     |> File.stream!()
     |> Enum.map(&String.trim/1)
     |> Enum.map(fn x -> String.split(x, "x") |> Enum.map(&String.to_integer/1) end)
-    |> Enum.map(&calc_ribbon/1)
-    |> Enum.sum()
   end
 
   def calc_paper(dims) do

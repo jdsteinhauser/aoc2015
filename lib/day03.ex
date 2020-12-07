@@ -1,21 +1,13 @@
 defmodule Day3 do
   def part1 do
-    "day03.txt"
-    |> File.read!()
-    |> String.trim()
-    |> to_charlist()
+    data()
     |> Enum.reduce({{0,0}, %{{0,0} => 1}}, &reducer/2)
     |> elem(1)
     |> Enum.count()
   end
 
   def part2 do
-    pairs =
-      "day03.txt"
-      |> File.read!()
-      |> String.trim()
-      |> to_charlist()
-      |> Enum.chunk_every(2)
+    pairs = Enum.chunk_every(data(), 2)
 
     {_, santa_drops} =
       pairs
@@ -28,6 +20,13 @@ defmodule Day3 do
       |> Enum.reduce({{0,0}, santa_drops}, &reducer/2)
 
     Enum.count(robo_drops)
+  end
+
+  def data do
+    "day03.txt"
+    |> File.read!()
+    |> String.trim()
+    |> to_charlist()
   end
   
   def reducer(direction, {{x, y}, houses}) do
